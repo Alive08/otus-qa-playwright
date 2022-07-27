@@ -4,5 +4,5 @@ requests==2.27.1
 faker==13.11.1
 allure-pytest==2.9.45
 mysql-connector-python==8.0.22
-playwright
-pytest-playwright
+playwright==1.24.0
+pytest-playwright==0.3.0
