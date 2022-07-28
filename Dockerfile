@@ -5,11 +5,11 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get install -y xvfb
 
-COPY ./requirements.txt /app/
+COPY ./requirements.txt .
 
 RUN python3 -m pip install pip -U && \
     pip install -r requirements.txt
 
-COPY . /app/
+COPY . .
 
-ENTRYPOINT [ "/app/entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]

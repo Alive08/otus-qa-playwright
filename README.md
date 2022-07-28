@@ -1,2 +1,2 @@
 # otus-qa-playwright
-Playwright UI tests
+Playwright UI tests (POC)
