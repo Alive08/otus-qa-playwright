@@ -12,4 +12,6 @@ RUN python3 -m pip install pip -U && \
 
 COPY . .
 
+ENV PYTHONPATH=.
+
 ENTRYPOINT [ "./entrypoint.sh" ]
