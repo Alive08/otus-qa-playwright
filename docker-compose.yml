@@ -44,7 +44,7 @@ services:
       # build:
       #   context: .
       #   dockerfile: Dockerfile
-      user: ${UID}:${GID}
+      # user: ${UID}:${GID}
       entrypoint:
         - ./wait-for-it.sh
         - mariadb:3306
