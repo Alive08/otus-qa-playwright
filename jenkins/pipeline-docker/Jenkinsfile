@@ -10,7 +10,7 @@ pipeline {
 
     stages {
     
-        stage('Setup parameters') {
+        stage('Setup Parameters') {
             steps {
                 script { 
                     properties([
@@ -21,15 +21,9 @@ pipeline {
                                 trim: true
                             ),
                             string(
-                                defaultValue: """
-                                --test-log-level=INFO --headless --db-host=mariadb --alluredir=artifacts/allure-results
+                                defaultValue: """--test-log-level=INFO --db-host=mariadb --alluredir=artifacts/allure-results
                                 """,
                                 name: 'PYTEST_ARGS', 
-                                trim: true
-                            ),
-                            string(
-                                defaultValue: 'selenoid', 
-                                name: 'EXECUTOR', 
                                 trim: true
                             ),
                             string(
@@ -39,14 +33,19 @@ pipeline {
                             ),
                             choice (
                                 name: 'BROWSER',
-                                choices: 'chrome\nfirefox',
-                                defaultValue: 'chrome'
+                                choices: 'chromium\nfirefox\nwebkit',
+                                defaultValue: 'chromium'
                             ),
-                            string(
-                                defaultValue: '', 
-                                name: 'BROWSER_VERSION', 
-                                trim: true
+                            booleanParam (
+                                name: 'HEADED',
+                                defaultValue: false,
+                                description: 'Run browser in headed mode'
                             ),
+                            // string(
+                            //     defaultValue: '', 
+                            //     name: 'BROWSER_VERSION', 
+                            //     trim: true
+                            // ),
                             string(
                                 defaultValue: '1', 
                                 name: 'THREADS', 
@@ -57,21 +56,30 @@ pipeline {
                 }
             }
         }
-    
-    
-        stage('Tests') {
+        
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Alive08/otus-qa-selenium.git'
-
-                sh """
+                git branch: 'main',url: 'https://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@github.com/Alive08/otus-qa-playwright.git'
+            }
+        }
+        
+        stage('Setup Environment') {
+            steps {
+                sh """#!/bin/bash
+                rm -rf ./artifacts
+                mkdir -p artifacts
+                """
+            }
+        }
+    
+        stage('Run Tests') {
+            steps {
+                sh """#!/bin/bash
+                [ ${params.HEADED} == "true" ] && headed="--headed" || headed=""
                 ./run_tests_compose.sh \
-                --headless \
+                \${headed} \
                 --browser=${params.BROWSER} \
-                --bversion=${params.BROWSER_VERSION} \
-                --executor=${params.EXECUTOR} \
                 --base-url=${params.BASE_URL} \
-                --db-host=mariadb \
-                --alluredir=artifacts/allure-results \
                 -n ${params.THREADS} \
                 ${params.TESTS}
                 """
@@ -79,7 +87,7 @@ pipeline {
 
             post {
                 always {
-                    allure includeProperties: false, jdk: '', report: 'artifacts/allure-report', results: [[path: 'artifacts/allure-results']]
+                    // allure includeProperties: false, jdk: '', report: 'artifacts/allure-report', results: [[path: 'artifacts/allure-results']]
                     archiveArtifacts artifacts: 'artifacts/*.log', allowEmptyArchive: 'true'
                     archiveArtifacts artifacts: 'artifacts/screenshots/**/*.png', allowEmptyArchive: 'true'
                 }
