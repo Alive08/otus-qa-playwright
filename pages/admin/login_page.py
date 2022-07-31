@@ -56,14 +56,17 @@ class AdminLogin(BasePage):
         return self.page.locator("button.close")
 
     def open(self):
+        self._logger.info("navigate to %s", self.url)
         self.page.goto(self.url)
 
     def login_with(self, username, password):
+        self._logger.info("admin login with %s / %s", username, password)
         self.username_input.fill(username)
         self.password_input.fill(password)
         self.login_button.click()
 
     def restore_password(self, email):
+        self._logger.info("restore admin password with email %s", email)
         self.forgotten_password_link.click()
         self.email_input.fill(email)
         self.forgotten_password_submit_button.click()
