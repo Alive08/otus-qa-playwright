@@ -6,6 +6,11 @@ networks:
 
 services:
   
+  xvfb:
+    image: 'xvfb:latest'
+    networks:
+      - test_net
+
   mariadb:
     image: docker.io/bitnami/mariadb:10.6
     environment:
@@ -40,11 +45,13 @@ services:
       - test_net
 
   tests:
-      image: mypw
+      image: mypw:latest
       # build:
       #   context: .
       #   dockerfile: Dockerfile
-      # user: ${UID}:${GID}
+      user: ${UID}:${GID}
+      environment:
+        - DISPLAY=xvfb:99
       entrypoint:
         - ./wait-for-it.sh
         - mariadb:3306
