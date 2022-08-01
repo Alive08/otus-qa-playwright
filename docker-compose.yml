@@ -49,7 +49,7 @@ services:
       # build:
       #   context: .
       #   dockerfile: Dockerfile
-      user: ${UID}:${GID}
+      user: 1000:${GID}
       environment:
         - DISPLAY=xvfb:99
       entrypoint:
