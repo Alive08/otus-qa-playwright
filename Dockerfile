@@ -15,8 +15,8 @@ COPY . .
 
 ENV PYTHONPATH=.
 
-RUN groupadd --gid ${MY_GID} ci \
-    && useradd --uid ${MY_UID} --gid ci \
-    --shell /bin/bash --create-home ci
+# RUN groupadd --gid ${MY_GID} ci \
+#     && useradd --uid ${MY_UID} --gid ci \
+#     --shell /bin/bash --create-home ci
 
 ENTRYPOINT [ "./entrypoint.sh" ]
