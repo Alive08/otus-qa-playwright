@@ -1,5 +1,6 @@
 import logging
 import logging.config
+from pathlib import Path
 import sys
 from logging import FileHandler
 
@@ -33,6 +34,8 @@ def _init_logger(name='', level=None, logfile=None):
 
     if logfile:
         file_handler = FileHandler(filename=logfile, mode='a')
+        if Path(logfile).exists():
+            Path(logfile).chmod(0o666)
         if level:
             file_handler.setLevel(level)
         file_handler.setFormatter(formatter)

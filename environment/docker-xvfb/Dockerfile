@@ -1,6 +1,4 @@
 FROM alpine
-MAINTAINER Patrice FERLET <metal3d gmail.com>
-
 
 RUN set -xe; \
     apk add --update xvfb;\
