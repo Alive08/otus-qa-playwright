@@ -15,7 +15,7 @@ fi
 
 export UID
 
-export GID=$(id -u)
+export GID=$(id -g)
 
 rm -rf artifacts
 
