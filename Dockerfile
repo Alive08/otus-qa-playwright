@@ -6,7 +6,7 @@ ARG GROUP_ID
 
 RUN groupadd -g ${GROUP_ID} ci && \
     useradd --uid ${USER_ID} --gid ci \
-    --shell /bin/bash --create-home ci && \
+        --shell /bin/bash --create-home ci && \
     install -d -m 0755 -o ci -g ci /app/artifacts && \
     chown --changes --silent --no-dereference --recursive \
         ${USER_ID}:${GROUP_ID} \
@@ -23,10 +23,5 @@ COPY . .
 
 ENV PYTHONPATH=.
 
-# RUN groupadd --gid ${MY_GID} ci \
-#     && useradd --uid ${MY_UID} --gid ci \
-#     --shell /bin/bash --create-home ci
-
 ENTRYPOINT [ "./entrypoint.sh" ]
 
-# CMD ["bin/bash"]
