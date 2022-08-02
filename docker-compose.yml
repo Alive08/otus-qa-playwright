@@ -49,9 +49,9 @@ services:
       # build:
       #   context: .
       #   dockerfile: Dockerfile
+      # environment:
+      #   - DISPLAY=xvfb:99
       user: pwuser:pwuser
-      environment:
-        - DISPLAY=xvfb:99
       entrypoint:
         - ./wait-for-it.sh
         - mariadb:3306

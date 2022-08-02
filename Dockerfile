@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY ./requirements.txt .
 
-RUN chown pwuser:pwuser /app && chmod 775 /app && \
+RUN chown pwuser:pwuser /app && chmod 777 /app && \
     python3 -m pip install pip -U && \
     pip install -r requirements.txt
 

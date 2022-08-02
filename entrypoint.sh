@@ -11,6 +11,6 @@ if grep -q "headed" <<< "$@"; then
     XVFB="xvfb-run"
 fi
 
-echo "Executing $@"
+echo "Executing ${XVFB} pytest $@"
 
-$@
+${XVFB} pytest $@
