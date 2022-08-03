@@ -1,0 +1,2 @@
+[32mINFO    [0m opencart.conftest:conftest.py:43 >>> RUN <test_admin_login_successful> <<<
+[32mINFO    [0m opencart.conftest:conftest.py:47 >>> END <test_admin_login_successful> <<<
