@@ -1,3 +1,0 @@
-[32mINFO    [0m opencart.conftest:conftest.py:43 >>> RUN <test_admin_login_successful[chromium]> <<<
-[32mINFO    [0m opencart.AdminLogin:login_page.py:59 navigate to /admin
-[32mINFO    [0m opencart.conftest:conftest.py:47 >>> END <test_admin_login_successful[chromium]> <<<

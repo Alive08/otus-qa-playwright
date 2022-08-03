@@ -1,2 +1,0 @@
-2022-08-04 02:08:54,554 [INFO] [opencart.conftest] [log] > >>> RUN <test_admin_login_successful> <<<
-2022-08-04 02:08:54,589 [INFO] [opencart.conftest] [log] > >>> END <test_admin_login_successful> <<<

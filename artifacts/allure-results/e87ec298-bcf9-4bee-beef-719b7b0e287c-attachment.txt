@@ -1,2 +1,0 @@
-2022-08-04 02:08:54,600 [INFO] [opencart.conftest] [log] > >>> RUN <test_admin_restore_password_with_valid_email> <<<
-2022-08-04 02:08:54,605 [INFO] [opencart.conftest] [log] > >>> END <test_admin_restore_password_with_valid_email> <<<

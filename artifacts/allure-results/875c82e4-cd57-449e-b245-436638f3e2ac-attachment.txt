@@ -1,3 +1,0 @@
-2022-08-04 02:11:23,851 [INFO] [opencart.conftest] [log] > >>> RUN <test_admin_login_error[chromium]> <<<
-2022-08-04 02:11:24,039 [INFO] [opencart.AdminLogin] [open] > navigate to /admin
-2022-08-04 02:11:24,541 [INFO] [opencart.conftest] [log] > >>> END <test_admin_login_error[chromium]> <<<

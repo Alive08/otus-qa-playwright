@@ -1,3 +1,0 @@
-2022-08-04 02:11:25,464 [INFO] [opencart.conftest] [log] > >>> RUN <test_admin_restore_password_with_invalid_email[chromium]> <<<
-2022-08-04 02:11:25,635 [INFO] [opencart.AdminLogin] [open] > navigate to /admin
-2022-08-04 02:11:25,920 [INFO] [opencart.conftest] [log] > >>> END <test_admin_restore_password_with_invalid_email[chromium]> <<<
