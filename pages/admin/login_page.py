@@ -56,16 +56,19 @@ class AdminLogin(BasePage):
     def close_alert_button(self):
         return self.page.locator("button.close")
 
+    @allure.step("Open the page")
     def open(self):
         self._logger.info("navigate to %s", self.url)
         self.page.goto(self.url)
 
+    @allure.step("Submit {username} / {password} to the admin login form")
     def login_with(self, username, password):
         self._logger.info("admin login with %s / %s", username, password)
         self.username_input.fill(username)
         self.password_input.fill(password)
         self.login_button.click()
 
+    @allure.step("Submit {email} to the admin password restore form")
     def restore_password(self, email):
         self._logger.info("restore admin password with email %s", email)
         self.forgotten_password_link.click()

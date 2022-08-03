@@ -25,9 +25,9 @@ services:
 
   opencart:
     image: docker.io/bitnami/opencart:3
-    ports:
-      - '8080:8080'
-      - '8443:8443'
+    # ports:
+    #   - '8080:8080'
+    #   - '8443:8443'
     environment:
       - OPENCART_HOST=opencart:8080
       - OPENCART_DATABASE_HOST=mariadb
