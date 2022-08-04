@@ -1,12 +1,9 @@
-import time
 from pathlib import Path
-from datetime import datetime
 
-import allure
 import pytest
-from allure_commons.types import AttachmentType
 from frame.classes import Creds
 from frame.logger import _init_logger
+from frame.utils import take_screenshot_allure, take_screenshot_playwright
 from pages.admin.login_page import AdminLogin
 from playwright.sync_api import Page, expect
 
@@ -94,23 +91,6 @@ def pytest_runtest_makereport(item, call):
     # which can be "setup", "call", "teardown"
 
     setattr(item, "rep_" + rep.when, rep)
-
-
-def take_screenshot_playwright(page: Page, dir, nodeid):
-    time.sleep(1)
-    file_name = f'{nodeid}_{datetime.today().strftime("%Y-%m-%d_%H:%M")}.png'.replace("/",
-                                                                                      "_").replace("::", "__")
-
-    with open(f"{dir}/{file_name}", 'wb') as bin_file:
-        bin_file.write(page.screenshot(full_page=True))
-
-    return file_name
-
-
-def take_screenshot_allure(page: Page, nodeid):
-    # time.sleep(1)
-    allure.attach(page.screenshot(full_page=True, type='png'), name=nodeid,
-                  attachment_type=AttachmentType.PNG)
 
 
 @pytest.fixture(scope="function", autouse=True)

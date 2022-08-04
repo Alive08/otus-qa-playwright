@@ -87,7 +87,7 @@ pipeline {
 
             post {
                 always {
-                    // allure includeProperties: false, jdk: '', report: 'artifacts/allure-report', results: [[path: 'artifacts/allure-results']]
+                    allure includeProperties: false, jdk: '', report: 'artifacts/allure-report', results: [[path: 'artifacts/allure-results']]
                     archiveArtifacts artifacts: 'artifacts/*.log', allowEmptyArchive: 'true'
                     archiveArtifacts artifacts: 'artifacts/screenshots/**/*.png', allowEmptyArchive: 'true'
                 }
