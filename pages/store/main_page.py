@@ -1,5 +1,9 @@
 from pages.base_page import BasePage
 
+
 class MainPage(BasePage):
 
-    pass
+    @property
+    def title(self):
+        return "Your Store"
+

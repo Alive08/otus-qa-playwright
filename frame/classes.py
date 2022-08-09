@@ -23,3 +23,9 @@ class ProductData:
     price: int
     quantity: int
     categories: str
+
+
+class Currency(Enum):
+    USD = '$'
+    EUR = '€'
+    GBP = '£'

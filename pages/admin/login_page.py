@@ -67,22 +67,22 @@ class AdminLogin(BasePage):
 
         with allure.step("input username {username}"):
             self.username_input.fill(username)
-        
+
         with allure.step("input password {password}"):
             self.password_input.fill(password)
-        
+
         with allure.step("click Login button"):
             self.login_button.click()
 
     @allure.step("Submit {email} to the admin password restore form")
     def restore_password(self, email):
         self._logger.info("restore admin password with email %s", email)
-        
+
         with allure.step("click forgotten password link"):
             self.forgotten_password_link.click()
-        
+
         with allure.step("input email {email}"):
             self.email_input.fill(email)
-        
+
         with allure.step("click Submit button"):
             self.forgotten_password_submit_button.click()
