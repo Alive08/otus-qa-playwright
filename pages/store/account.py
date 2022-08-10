@@ -1,8 +1,10 @@
 import allure
+from playwright.sync_api import Page
 from pages.base_page import BasePage
+from pages.elements.account_dropdown import AccountDropdown
 
 
-class CustomerLogin(BasePage):
+class CustomerAccount(BasePage):
 
     """
         LOCATOR_BUTTON_CONTINUE = Selector(
@@ -13,9 +15,17 @@ class CustomerLogin(BasePage):
 
     """
 
+    def __init__(self, page: Page, url: str = '/index.php?route=account/login'):
+        super().__init__(page, url)
+        self.account_dropdown = AccountDropdown(self.page)
+
     @property
     def login_title(self):
         return "Account Login"
+
+    @property
+    def logout_title(self):
+        return "Account Logout"
 
     @property
     def account_title(self):
@@ -73,3 +83,8 @@ class CustomerLogin(BasePage):
         self.email_input.fill(email)
         self.password_input.fill(password)
         self.login_button.click()
+
+    @allure.step("do logout")
+    def logout(self):
+        self.account_dropdown.menu.click()
+        self.account_dropdown.logout.click()

@@ -1,9 +1,9 @@
-import datetime
 import hashlib
 import random
 import socket
 import string
 import time
+from datetime import datetime
 
 import allure
 import pytest

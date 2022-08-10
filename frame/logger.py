@@ -1,8 +1,8 @@
 import logging
 import logging.config
-from pathlib import Path
 import sys
 from logging import FileHandler
+from pathlib import Path
 
 APP_NAME = "opencart"
 

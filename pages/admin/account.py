@@ -2,7 +2,7 @@ import allure
 from pages.base_page import BasePage
 
 
-class AdminLogin(BasePage):
+class AdminAccount(BasePage):
 
     @property
     def login_title(self):

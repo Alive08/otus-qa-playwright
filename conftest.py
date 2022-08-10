@@ -3,6 +3,13 @@ import sys
 
 import pytest
 
+pytest_plugins = [
+    "fixtures.data",
+    "fixtures.db",
+    "fixtures.logger",
+    "fixtures.pages"
+]
+
 
 def mydir():
     return os.path.dirname(os.path.abspath(__file__))

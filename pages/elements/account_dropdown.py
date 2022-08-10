@@ -21,28 +21,16 @@ class AccountDropdown:
 
     @property
     def login(self):
-        return self.page.locator('a', has_text='Login')
+        return self.page.locator("#top-links >> text=Login")
 
     @property
     def register(self):
-        return self.page.locator('a', has_text='Register')
+        return self.page.locator("#top-links >> text=Register")
 
     @property
     def my_account(self):
         return self.page.locator('a', has_text='My Account')
-
-    @property
-    def order_history(self):
-        return self.page.locator('a', has_text='Order History')
-
-    @property
-    def transactions(self):
-        return self.page.locator('a', has_text='Transactions')
-
-    @property
-    def downloads(self):
-        return self.page.locator('a', has_text='Downloads')
-    
+        
     @property
     def logout(self):
-        return self.page.locator('a', has_text='Logout')
+        return self.page.locator("#top-links >> text=Logout")
