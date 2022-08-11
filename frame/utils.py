@@ -55,18 +55,16 @@ class Utils:
         round_2 = hashlib.sha1((salt + round_1).encode('utf-8')).hexdigest()
         return (salt, round_2)
 
-
     def take_screenshot_playwright(page: Page, dir, nodeid):
         time.sleep(1)
         file_name = f'{nodeid}_{datetime.today().strftime("%Y-%m-%d_%H:%M")}.png'.replace("/",
-                                                                                        "_").replace("::", "__")
+                                                                                          "_").replace("::", "__")
         with open(f"{dir}/{file_name}", 'wb') as bin_file:
             bin_file.write(page.screenshot(full_page=True))
 
         return file_name
 
-
     def take_screenshot_allure(page: Page, nodeid):
         time.sleep(1)
         allure.attach(page.screenshot(full_page=True, type='png'), name=nodeid,
-                    attachment_type=AttachmentType.PNG)
+                      attachment_type=AttachmentType.PNG)

@@ -1,7 +1,7 @@
 import pytest
 from faker import Faker
 from frame.classes import AccountData, Creds, ProductData
-
+import random
 
 @pytest.fixture(scope='session')
 def account_admin_valid():
@@ -47,5 +47,14 @@ def product_random():
         model=f'test_{faker.word()}',
         price=faker.pyint(),
         quantity=faker.pyint(),
-        # categories=random.choice(product.item_names)
+        categories=random.choice([
+            'desktops',
+            'laptops',
+            'components',
+            'tablets',
+            'software',
+            'phones',
+            'cameras',
+            'MP3Players'
+        ])
     )
