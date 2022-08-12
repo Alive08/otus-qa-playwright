@@ -51,15 +51,15 @@ class CustomerAccount(BasePage):
 
     @property
     def forgotten_password_back_button(self):
-        return self.page.locator("a.btn.btn-default")
+        return self.page.locator("text=Back")
 
     @property
     def forgotten_password_continue_button(self):
-        return self.page.locator("button.btn.btn-primary")
+        return self.page.locator("text=Continue")
 
     @property
     def forgotten_password_link(self):
-        return self.page.locator("text='Forgotten Password'")
+        return self.page.locator("#content >> text=Forgotten Password")
 
     @property
     def alert_success_message(self):
@@ -88,3 +88,10 @@ class CustomerAccount(BasePage):
     def logout(self):
         self.account_dropdown.menu.click()
         self.account_dropdown.logout.click()
+
+    @allure.step("submit password restore form for {email}")
+    def restore_password(self, email):
+        self.email_input.fill(email)
+        self.forgotten_password_continue_button.click()
+
+

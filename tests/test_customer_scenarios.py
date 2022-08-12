@@ -40,10 +40,32 @@ class TestCustomerScenarios:
     @allure.title("Customer can restore access to account")
     @allure.severity(allure.severity_level.NORMAL)
     def test_customer_restore_password(self, customer_page: CustomerAccount, account_valid, db_customer_valid):
-        pass
+        
+        with allure.step("navigate to password restore page"):
+            customer_page.forgotten_password_link.click()
+            expect(customer_page.page).to_have_title(
+                customer_page.forgotten_password_title)
+        
+        with allure.step("try to restore password for {account_valid.email}"):
+            customer_page.restore_password(account_valid.email)
+            expect(customer_page.alert_success_message).to_be_visible()
+
+    @allure.story("Customer's account")
+    @allure.title("Customer can cancel to restore password")
+    @allure.severity(allure.severity_level.NORMAL)
+    def test_customer_cancel_restore_password(self, customer_page: CustomerAccount):
+        
+        with allure.step("navigate to password restore page"):
+            customer_page.forgotten_password_link.click()
+            expect(customer_page.page).to_have_title(
+                customer_page.forgotten_password_title)
+        
+        with allure.step("return back to login page"):
+            customer_page.forgotten_password_back_button.click()
+            expect(customer_page.page).to_have_title(customer_page.login_title)
 
     @allure.story("Customer's account")
     @allure.title("Customer can register new account")
     @allure.severity(allure.severity_level.NORMAL)
-    def test_customer_register_account(self):
+    def test_customer_register_account(self, customer_page: CustomerAccount):
         pass
