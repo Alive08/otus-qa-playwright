@@ -12,6 +12,7 @@ class BasePage:
 
     @allure.step("open page")
     def open(self):
+        self._logger.info("navigate to %s", self.url)
         self.page.goto(self.url)
 
     def __getattr__(self, attr):

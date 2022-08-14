@@ -130,11 +130,6 @@ class CustomerAccount(BasePage):
     def text_danger(self):
         return self.page.locator("div.text-danger")
 
-    @allure.step("open the page")
-    def open(self):
-        self._logger.info("navigate to %s", self.url)
-        self.page.goto(self.url)
-
     @allure.step("do login with {email} / {password}")
     def login_with(self, email, password):
         self.email_input.fill(email)

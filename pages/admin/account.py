@@ -60,11 +60,6 @@ class AdminAccount(BasePage):
     def close_alert_button(self):
         return self.page.locator("button.close")
 
-    @allure.step("Open the page")
-    def open(self):
-        self._logger.info("navigate to %s", self.url)
-        self.page.goto(self.url)
-
     @allure.step("Submit {username} / {password} to the admin login form")
     def login_with(self, username, password):
         self._logger.info("admin login with %s / %s", username, password)
