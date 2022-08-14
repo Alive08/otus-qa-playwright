@@ -45,6 +45,8 @@ services:
       #   context: .
       #   dockerfile: Dockerfile
       user: ${UID}:${GID}
+      environment:
+        - DEBUG=${DEBUG}
       entrypoint:
         - ./wait-for-it.sh
         - mariadb:3306

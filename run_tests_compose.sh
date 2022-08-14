@@ -17,13 +17,15 @@ export UID
 
 export GID=$(id -g)
 
+export DEBUG=${DEBUG}
+
+export PYTEST_ARGS="$@"
+
 rm -rf artifacts
 
 mkdir -p artifacts
 
 docker network create --driver bridge test_net || true
-
-export PYTEST_ARGS="$@"
 
 docker-compose up --abort-on-container-exit
 
