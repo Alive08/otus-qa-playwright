@@ -48,13 +48,13 @@ def product_random():
         price=faker.pyint(),
         quantity=faker.pyint(),
         categories=random.choice([
-            'desktops',
-            'laptops',
-            'components',
-            'tablets',
-            'software',
-            'phones',
-            'cameras',
-            'MP3Players'
+            'Desktops',
+            'Laptops',
+            'Components',
+            'Tablets',
+            'Software',
+            'Phones',
+            'Cameras',
+            'MP3 Players'
         ])
     )

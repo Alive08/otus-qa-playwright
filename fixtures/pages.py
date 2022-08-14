@@ -2,8 +2,8 @@ import pytest
 from playwright.sync_api import Page, expect
 
 from pages.admin.account import AdminAccount
-from pages.store.account import CustomerAccount
-from pages.store.main_page import MainPage
+from pages.customer.account import CustomerAccount
+from pages.customer.main_page import MainPage
 
 
 @pytest.fixture()

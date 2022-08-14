@@ -1,8 +1,12 @@
+from playwright.sync_api import Page
 import allure
 from pages.base_page import BasePage
 
 
 class AdminAccount(BasePage):
+
+    def __init__(self, page: Page, url: str = '/admin'):
+        super().__init__(page, url)
 
     @property
     def login_title(self):
@@ -73,6 +77,10 @@ class AdminAccount(BasePage):
 
         with allure.step("click Login button"):
             self.login_button.click()
+
+    @allure.step("logout")
+    def logout(self):
+        self.page.locator('#header > div > ul > li:nth-child(2) > a').click()
 
     @allure.step("Submit {email} to the admin password restore form")
     def restore_password(self, email):
