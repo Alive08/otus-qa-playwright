@@ -33,7 +33,7 @@ mkdir -p artifacts
 
 docker network create --driver bridge test_net || true
 
-docker-compose up --build --abort-on-container-exit
+docker-compose up --abort-on-container-exit --build
 
 tests_status=$?
 
@@ -41,6 +41,7 @@ docker-compose down
 
 docker network rm test_net
 
+# cleanup
 docker images -a -q -f "dangling=true" | xargs docker rmi
 
 exit ${tests_status}

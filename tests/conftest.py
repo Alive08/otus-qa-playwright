@@ -4,7 +4,6 @@ import pytest
 def pytest_addoption(parser):
     parser.addoption("--myip", default='localhost')
     parser.addoption("--db-host", default='localhost')
-    parser.addoption("--bversion", default=None)
     parser.addoption("--test-log-level", default="INFO",
                      choices=("DEBUG", "INFO", "WARNING", "ERROR"))
     parser.addoption("--test-log-file", default="artifacts/testrun.log")
