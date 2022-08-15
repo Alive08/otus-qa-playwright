@@ -41,6 +41,11 @@ pipeline {
                                 defaultValue: false,
                                 description: 'Run browser in headed mode'
                             ),
+                            booleanParam (
+                                name: 'PW_DEBUG',
+                                defaultValue: false,
+                                description: 'Playwright DEBUG mode'
+                            ),
                             // string(
                             //     defaultValue: '', 
                             //     name: 'BROWSER_VERSION', 
@@ -77,6 +82,8 @@ pipeline {
             steps {
                 sh """#!/bin/bash
                 [ ${params.HEADED} == "true" ] && headed="--headed" || headed=""
+                [ ${params.PW_DEBUG} == "true" ] && pw_debug="pw:api" || pw_debug=""
+                DEBUG=\${pw_debug} \
                 ./run_tests_compose.sh \
                 \${headed} \
                 --browser=${params.BROWSER} \
