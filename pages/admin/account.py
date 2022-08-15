@@ -1,6 +1,15 @@
-from playwright.sync_api import Page
+from dataclasses import dataclass
+
 import allure
 from pages.base_page import BasePage
+from playwright.sync_api import Page
+
+
+@dataclass
+class AccountErrors:
+
+    TEXT_CONFIRMATION_EMAIL_SENT = "An email with a confirmation link has been sent"
+    TEXT_EMAIL_NOT_FOUND = "The E-Mail Address was not found"
 
 
 class AdminAccount(BasePage):

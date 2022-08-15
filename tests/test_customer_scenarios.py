@@ -129,7 +129,7 @@ class TestCustomerScenarios:
         with allure.step("submit registration form"):
             customer_page.register_account(account_random)
             expect(customer_page.text_danger).to_have_text(
-                "Password confirmation does not match password!")
+                AccountErrors.TEXT_PASSWORDS_MISMATCH)
 
     @allure.severity(allure.severity_level.NORMAL)
     @allure.story("Customer's account")

@@ -1,7 +1,7 @@
 import allure
 import pytest
 from frame.classes import ProductData
-from pages.admin.account import AdminAccount
+from pages.admin.account import AccountErrors, AdminAccount
 from pages.admin.admin import Admin
 from pages.admin.product import AdminProduct
 from playwright.sync_api import expect
@@ -46,7 +46,7 @@ class TestAdminLogin:
             expect(admin_page.page).to_have_title(
                 admin_page.login_title)
             expect(admin_page.alert_success_message).to_contain_text(
-                'An email with a confirmation link has been sent')
+                AccountErrors.TEXT_CONFIRMATION_EMAIL_SENT)
 
         with allure.step("Close success alert"):
             admin_page.close_alert_button.click()
@@ -62,7 +62,7 @@ class TestAdminLogin:
             expect(admin_page.page).to_have_title(
                 admin_page.forgotten_password_title)
             expect(admin_page.alert_danger_message).to_contain_text(
-                'The E-Mail Address was not found')
+                AccountErrors.TEXT_EMAIL_NOT_FOUND)
 
         with allure.step("Close danger alert"):
             admin_page.close_alert_button.click()
