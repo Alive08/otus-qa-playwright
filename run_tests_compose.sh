@@ -13,6 +13,12 @@ if [ $# -eq 0 ]; then
     usage
 fi
 
+CI_USER=jenkins
+
+export USER_ID=$(id ${CI_USER} -u)
+
+export GROUP_ID=$(id ${CI_USER} -g)
+
 export UID
 
 export GID=$(id -g)

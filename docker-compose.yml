@@ -40,10 +40,13 @@ services:
       - test_net
 
   tests:
-      image: mypw:latest
-      # build:
-      #   context: .
-      #   dockerfile: Dockerfile
+      # image: mypw:latest
+      build:
+        context: .
+        dockerfile: Dockerfile
+        args:
+          - USER_ID=${USER_ID}
+          - GROUP_ID=${GROUP_ID}
       user: ${UID}:${GID}
       environment:
         - DEBUG=${DEBUG}
