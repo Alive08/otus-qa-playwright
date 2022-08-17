@@ -8,7 +8,7 @@ from playwright.sync_api import expect
 
 
 @allure.feature("Admin side scenarios")
-@allure.story("Admin login scenarios")
+@allure.story("Admin account scenarios")
 class TestAdminLogin:
 
     @allure.severity(allure.severity_level.BLOCKER)
