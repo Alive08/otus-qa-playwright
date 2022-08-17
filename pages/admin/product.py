@@ -111,6 +111,7 @@ class AdminProduct(BasePage):
     @allure.step("get all products from list")
     def get_products(self) -> Locator:
         self._logger.info("get all products from list")
+        self.wait_for_selector("#form-product > * table")
         if not self.product_rows.no_result.is_visible(timeout=5):
             return self.product_rows.itself
 
