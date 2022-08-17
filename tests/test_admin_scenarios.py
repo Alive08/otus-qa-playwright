@@ -1,6 +1,6 @@
 import allure
 import pytest
-from frame.classes import ProductData
+from frame.classes import AccountData, Creds, ProductData
 from pages.admin.account import AccountErrors, AdminAccount
 from pages.admin.admin import Admin
 from pages.admin.product import AdminProduct
@@ -15,7 +15,7 @@ class TestAdminLogin:
     @allure.title("Successful admin login")
     def test_admin_login_successful(self, admin_page: AdminAccount, account_admin_valid):
 
-        with allure.step("Submit login form data"):
+        with allure.step("Submit login form data {account_admin_valid.login} / {account_admin_valid.password}"):
             admin_page.login_with(*account_admin_valid)
             expect(admin_page.page).to_have_title(
                 admin_page.admin_title)
@@ -24,7 +24,7 @@ class TestAdminLogin:
     @allure.title("Error of admin login")
     def test_admin_login_error(self, admin_page: AdminAccount, account_admin_invalid):
 
-        with allure.step("Submit login form data"):
+        with allure.step("Submit login form data {account_admin_invalid.login} / {account_admin_invalid.password}"):
             admin_page.login_with(*account_admin_invalid)
             expect(admin_page.page).to_have_title(
                 admin_page.login_title)
@@ -90,7 +90,7 @@ class TestAdminProductManagement:
         login = AdminAccount(page)
         login.open()
 
-        with allure.step("do login with {account_admin_valid}"):
+        with allure.step("do login with {account_admin_valid.login} / {account_admin_valid.password}"):
             login.login_with(*account_admin_valid)
 
         with allure.step("go to product list and click Add button"):
@@ -127,11 +127,11 @@ class TestAdminProductManagement:
 
     @allure.severity(allure.severity_level.NORMAL)
     @allure.title("delete test product")
-    def test_delete_product(self, page, account_admin_valid, db_product_random):
+    def test_delete_product(self, page, account_admin_valid: Creds, db_product_random):
         login = AdminAccount(page)
         login.open()
 
-        with allure.step("do login with {account_admin_valid}"):
+        with allure.step("do login with {account_admin_valid.login} / {account_admin_valid.password}"):
             login.login_with(*account_admin_valid)
 
         with allure.step("go to product list"):
