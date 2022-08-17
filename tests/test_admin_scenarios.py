@@ -15,7 +15,7 @@ class TestAdminLogin:
     @allure.title("Successful admin login")
     def test_admin_login_successful(self, admin_page: AdminAccount, account_admin_valid):
 
-        with allure.step("Submit login form data {account_admin_valid.login} / {account_admin_valid.password}"):
+        with allure.step("Submit valid login form data"):
             admin_page.login_with(*account_admin_valid)
             expect(admin_page.page).to_have_title(
                 admin_page.admin_title)
@@ -24,7 +24,7 @@ class TestAdminLogin:
     @allure.title("Error of admin login")
     def test_admin_login_error(self, admin_page: AdminAccount, account_admin_invalid):
 
-        with allure.step("Submit login form data {account_admin_invalid.login} / {account_admin_invalid.password}"):
+        with allure.step("Submit invalid login form data"):
             admin_page.login_with(*account_admin_invalid)
             expect(admin_page.page).to_have_title(
                 admin_page.login_title)
@@ -90,7 +90,7 @@ class TestAdminProductManagement:
         login = AdminAccount(page)
         login.open()
 
-        with allure.step("do login with {account_admin_valid.login} / {account_admin_valid.password}"):
+        with allure.step("do login with valid account"):
             login.login_with(*account_admin_valid)
 
         with allure.step("go to product list and click Add button"):
@@ -131,7 +131,7 @@ class TestAdminProductManagement:
         login = AdminAccount(page)
         login.open()
 
-        with allure.step("do login with {account_admin_valid.login} / {account_admin_valid.password}"):
+        with allure.step("do login with valid account"):
             login.login_with(*account_admin_valid)
 
         with allure.step("go to product list"):
