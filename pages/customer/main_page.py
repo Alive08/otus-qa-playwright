@@ -1,7 +1,6 @@
-from multiprocessing.spawn import old_main_modules
-from playwright.sync_api import Page
 from pages.base_page import BasePage
 from pages.elements.currency_dropdown import CurrencyDropdown
+from playwright.sync_api import Page
 
 
 class MainPage(BasePage):
@@ -13,4 +12,3 @@ class MainPage(BasePage):
     @property
     def title(self):
         return "Your Store"
-

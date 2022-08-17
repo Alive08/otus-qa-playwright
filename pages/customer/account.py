@@ -20,14 +20,6 @@ class AccountErrors:
 
 class CustomerAccount(BasePage):
 
-    """
-        LOCATOR_BUTTON_CONTINUE = Selector(
-            By.CSS_SELECTOR, '#content > div > div > a')
-        LOCATOR_INPUT_EMAIL = Selector(By.ID, 'input-email')
-        LOCATOR_INPUT_PASSWORD = Selector(By.ID, 'input-password')
-        LOCATOR_BUTTON_LOGIN = Selector(By.CSS_SELECTOR, 'input[type=submit]')
-    """
-
     def __init__(self, page: Page, url: str = '/index.php?route=account/login'):
         super().__init__(page, url)
         self.account_dropdown = AccountDropdown(self.page)

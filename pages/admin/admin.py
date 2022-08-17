@@ -1,40 +1,5 @@
-import allure
-from playwright.sync_api import Page
 from pages.base_page import BasePage
-'''
-
-
-class AdminPageLocators(BaseLocator):
-
-    LOCATOR_ADD = Selector(By.CSS_SELECTOR, "a[data-original-title='Add New']")
-    LOCATOR_COPY = Selector(
-        By.CSS_SELECTOR, "button[data-original-title='Copy'")
-    LOCATOR_DELETE = Selector(
-        By.CSS_SELECTOR, "button[data-original-title='Delete']")
-    LOCATOR_SAVE = Selector(
-        By.CSS_SELECTOR, "button[data-original-title='Save']")
-    LOCATOR_CANCEL = Selector(
-        By.CSS_SELECTOR, "a[data-original-title='Cancel']")
-    LOCATOR_ALERT_DANGER_MESSAGE = Selector(
-        By.CSS_SELECTOR, "div.alert.alert-danger.alert-dismissible")
-    LOCATOR_ALERT_SUCCESS_MESSAGE = Selector(
-        By.CSS_SELECTOR, "div.alert.alert-success.alert-dismissible")
-    LOCATOR_BUTTON_ALERT_CLOSE = Selector(By.CSS_SELECTOR, "button.close")
-
-    class tabs(Node):
-        general = (By.LINK_TEXT, 'General')
-        data = (By.LINK_TEXT, 'Data')
-        links = (By.LINK_TEXT, 'Links')
-        attribute = (By.LINK_TEXT, 'Attribute')
-        option = (By.LINK_TEXT, 'Option')
-        recurring = (By.LINK_TEXT, 'Recurring')
-        discount = (By.LINK_TEXT, 'Discount')
-        special = (By.LINK_TEXT, 'Special')
-        image = (By.LINK_TEXT, 'Image')
-        reward_points = (By.LINK_TEXT, 'Reward Points')
-        seo = (By.LINK_TEXT, 'SEO')
-        design = (By.LINK_TEXT, 'Design')
-'''
+from playwright.sync_api import Page
 
 
 class Admin(BasePage):
@@ -48,7 +13,7 @@ class Admin(BasePage):
     @property
     def navigation(self):
         return Admin.Navigation()
-    
+
     @property
     def tabs(self):
         return Admin.Tabs()
@@ -82,7 +47,7 @@ class Admin(BasePage):
             @property
             def categories(self):
                 return self.page.locator("a", has_text="Categories")
-            
+
             @property
             def products(self):
                 return self.page.locator("a", has_text="Products")

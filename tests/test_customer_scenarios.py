@@ -1,6 +1,6 @@
 import allure
 import pytest
-from frame.classes import Currency, AccountData
+from frame.classes import AccountData, Currency
 from pages.customer.account import AccountErrors, CustomerAccount
 from pages.customer.main_page import MainPage
 from playwright.sync_api import expect
@@ -15,7 +15,7 @@ class TestCustomerScenarios:
     @pytest.mark.parametrize('cur', (c.name for c in Currency))
     def test_select_currency(self, main_page: MainPage, cur):
 
-        with allure.step("select currency {cur}"):
+        with allure.step(f"select currency {cur}"):
             main_page.currency_dropdown.select(cur)
             expect(main_page.currency_dropdown.selected).to_have_text(
                 Currency[cur].value)
@@ -25,7 +25,7 @@ class TestCustomerScenarios:
     @allure.title("Customer can login and logout")
     def test_customer_login_and_logout(self, customer_page: CustomerAccount, account_valid: AccountData, db_customer_valid):
 
-        with allure.step("login with {account_valid.email} / {account_valid.password_1}"):
+        with allure.step(f"login with {account_valid.email} / {account_valid.password_1}"):
             customer_page.login_with(
                 account_valid.email, account_valid.password_1)
             expect(customer_page.page).to_have_title(
@@ -46,7 +46,7 @@ class TestCustomerScenarios:
             expect(customer_page.page).to_have_title(
                 customer_page.forgotten_password_title)
 
-        with allure.step("try to restore password for {account_valid.email}"):
+        with allure.step(f"try to restore password for {account_valid.email}"):
             customer_page.restore_password(account_valid.email)
             expect(customer_page.alert_success_message).to_be_visible()
 
@@ -144,6 +144,6 @@ class TestCustomerScenarios:
         setattr(account_random, field, '')
         customer_page.new_account_continue_button.click()
 
-        with allure.step("submit registration form"):
+        with allure.step(f"submit registration form with empty field {field}"):
             customer_page.register_account(account_random)
             expect(customer_page.text_danger.first).to_have_text(expected)

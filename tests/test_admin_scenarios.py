@@ -1,6 +1,6 @@
 import allure
 import pytest
-from frame.classes import AccountData, Creds, ProductData
+from frame.classes import Creds, ProductData
 from pages.admin.account import AccountErrors, AdminAccount
 from pages.admin.admin import Admin
 from pages.admin.product import AdminProduct
@@ -13,9 +13,9 @@ class TestAdminLogin:
 
     @allure.severity(allure.severity_level.BLOCKER)
     @allure.title("Successful admin login")
-    def test_admin_login_successful(self, admin_page: AdminAccount, account_admin_valid):
+    def test_admin_login_successful(self, admin_page: AdminAccount, account_admin_valid: Creds):
 
-        with allure.step("Submit valid login form data"):
+        with allure.step(f"Submit valid login form data {account_admin_valid.login} / {account_admin_valid.password}"):
             admin_page.login_with(*account_admin_valid)
             expect(admin_page.page).to_have_title(
                 admin_page.admin_title)
@@ -24,12 +24,12 @@ class TestAdminLogin:
     @allure.title("Error of admin login")
     def test_admin_login_error(self, admin_page: AdminAccount, account_admin_invalid):
 
-        with allure.step("Submit invalid login form data"):
+        with allure.step(f"Submit invalid login form data {account_admin_invalid.login} / {account_admin_invalid.password}"):
             admin_page.login_with(*account_admin_invalid)
             expect(admin_page.page).to_have_title(
                 admin_page.login_title)
 
-        with allure.step("Close success alert"):
+        with allure.step("Close danger alert"):
             expect(admin_page.alert_danger_message).to_contain_text(
                 'No match')
             admin_page.close_alert_button.click()
@@ -39,7 +39,7 @@ class TestAdminLogin:
     @allure.title("Restore admin password with valid email")
     def test_admin_restore_password_with_valid_email(self, admin_page: AdminAccount):
 
-        with allure.step("Submit valid email to form"):
+        with allure.step("Submit valid admin's email to form"):
             admin_page.restore_password('user@example.com')
             expect(admin_page.page).to_have_title(
                 admin_page.login_title)
@@ -54,7 +54,7 @@ class TestAdminLogin:
     @allure.title("Restore admin password with invalid email")
     def test_admin_restore_password_with_invalid_email(self, admin_page: AdminAccount):
 
-        with allure.step("Submit valid email to form"):
+        with allure.step("Submit invalid admin's email to form"):
             admin_page.restore_password('user@example.net')
             expect(admin_page.page).to_have_title(
                 admin_page.forgotten_password_title)
@@ -79,6 +79,7 @@ class TestAdminLogin:
             expect(admin_page.page).to_have_title(
                 admin_page.login_title)
 
+
 @allure.feature("Admin side scenarios")
 @allure.story("Product management")
 class TestAdminProductManagement:
@@ -90,7 +91,7 @@ class TestAdminProductManagement:
         login = AdminAccount(page)
         login.open()
 
-        with allure.step("do login with valid account"):
+        with allure.step(f"do login with valid account {account_admin_valid.login} / {account_admin_valid.password}"):
             login.login_with(*account_admin_valid)
 
         with allure.step("go to product list and click Add button"):
@@ -131,7 +132,7 @@ class TestAdminProductManagement:
         login = AdminAccount(page)
         login.open()
 
-        with allure.step("do login with valid account"):
+        with allure.step(f"do login with valid account {account_admin_valid.login} / {account_admin_valid.password}"):
             login.login_with(*account_admin_valid)
 
         with allure.step("go to product list"):

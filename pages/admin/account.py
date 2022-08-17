@@ -73,10 +73,10 @@ class AdminAccount(BasePage):
     def login_with(self, username, password):
         self._logger.info("admin login with %s / %s", username, password)
 
-        with allure.step("input username {username}"):
+        with allure.step(f"input username {username}"):
             self.username_input.fill(username)
 
-        with allure.step("input password {password}"):
+        with allure.step(f"input password {password}"):
             self.password_input.fill(password)
 
         with allure.step("click Login button"):
@@ -93,7 +93,7 @@ class AdminAccount(BasePage):
         with allure.step("click forgotten password link"):
             self.forgotten_password_link.click()
 
-        with allure.step("input email {email}"):
+        with allure.step(f"input email {email}"):
             self.email_input.fill(email)
 
         with allure.step("click Submit button"):

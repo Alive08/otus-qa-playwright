@@ -1,15 +1,5 @@
-
-"""
-    form = (By.CSS_SELECTOR, "#form-currency")
-    button = (By.CSS_SELECTOR, "button.btn.btn-link.dropdown-toggle")
-    self = (By.CSS_SELECTOR, "ul.dropdown-menu")
-    usd = (By.CSS_SELECTOR, "button[name=USD]")
-    eur = (By.CSS_SELECTOR, "button[name=EUR]")
-    gbp = (By.CSS_SELECTOR, "button[name=GBP]")
-    selected = (By.CSS_SELECTOR, "strong")
-"""
+import allure
 from playwright.sync_api import Page
-from frame.classes import Currency
 
 
 class CurrencyDropdown:
@@ -45,6 +35,7 @@ class CurrencyDropdown:
     def selected(self):
         return self.page.locator("strong")
 
+    @allure.step("select currency {cur}")
     def select(self, cur):
         self.button.click()
         getattr(self, cur.lower()).click()
