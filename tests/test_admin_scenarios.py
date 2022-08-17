@@ -8,10 +8,10 @@ from playwright.sync_api import expect
 
 
 @allure.feature("Admin side scenarios")
+@allure.story("Admin login scenarios")
 class TestAdminLogin:
 
     @allure.severity(allure.severity_level.BLOCKER)
-    @allure.story("Admin login scenarios")
     @allure.title("Successful admin login")
     def test_admin_login_successful(self, admin_page: AdminAccount, account_admin_valid):
 
@@ -21,7 +21,6 @@ class TestAdminLogin:
                 admin_page.admin_title)
 
     @allure.severity(allure.severity_level.BLOCKER)
-    @allure.story("Admin login scenarios")
     @allure.title("Error of admin login")
     def test_admin_login_error(self, admin_page: AdminAccount, account_admin_invalid):
 
@@ -37,7 +36,6 @@ class TestAdminLogin:
             expect(admin_page.alert_danger_message).not_to_be_visible()
 
     @allure.severity(allure.severity_level.NORMAL)
-    @allure.story("Admin login scenarios")
     @allure.title("Restore admin password with valid email")
     def test_admin_restore_password_with_valid_email(self, admin_page: AdminAccount):
 
@@ -53,7 +51,6 @@ class TestAdminLogin:
             expect(admin_page.alert_success_message).not_to_be_visible()
 
     @allure.severity(allure.severity_level.NORMAL)
-    @allure.story("Admin login scenarios")
     @allure.title("Restore admin password with invalid email")
     def test_admin_restore_password_with_invalid_email(self, admin_page: AdminAccount):
 
@@ -69,7 +66,6 @@ class TestAdminLogin:
             expect(admin_page.alert_danger_message).not_to_be_visible()
 
     @allure.severity(allure.severity_level.MINOR)
-    @allure.story("Admin login scenarios")
     @allure.title("Cancel to restore admin password")
     def test_admin_restore_password_cancel(self, admin_page: AdminAccount):
 
@@ -83,8 +79,11 @@ class TestAdminLogin:
             expect(admin_page.page).to_have_title(
                 admin_page.login_title)
 
+@allure.feature("Admin side scenarios")
+@allure.story("Product management")
+class TestAdminProductManagement:
+
     @allure.severity(allure.severity_level.NORMAL)
-    @allure.story("Product management")
     @allure.title("add new product")
     def test_add_product(self, page, account_admin_valid, product_random: ProductData, db_delete_product):
 
@@ -127,7 +126,6 @@ class TestAdminLogin:
             login.logout()
 
     @allure.severity(allure.severity_level.NORMAL)
-    @allure.story("Product management")
     @allure.title("delete test product")
     def test_delete_product(self, page, account_admin_valid, db_product_random):
         login = AdminAccount(page)
