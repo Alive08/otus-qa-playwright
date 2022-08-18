@@ -23,7 +23,7 @@ pushd ${ENV_DIR}
 popd
 
 ./wait-for-it.sh opencart:3306 -t 180 --strict -- ./wait-for-it.sh opencart:8080 -t 180 --strict -- \
-	pytest --alluredir=artifacts/allure-results $@
+	pytest $@
 
 pushd ${ENV_DIR}
 ./down.sh
