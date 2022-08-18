@@ -1,0 +1,130 @@
+pipeline {
+    
+    tools {
+        allure 'Allure Report'
+        xvfb 'XVFB'
+    }
+    
+    agent {
+        label 'linux'
+    }
+
+    stages {
+    
+        stage('Setup Parameters') {
+            steps {
+                script { 
+                    properties([
+                        parameters([
+                            string(
+                                defaultValue: 'tests/test_pass.py', 
+                                name: 'TESTS', 
+                                trim: true
+                            ),
+                            string(
+                                defaultValue: """--test-log-level=INFO --db-host=opencart --alluredir=artifacts/allure-results
+                                """,
+                                name: 'PYTEST_ARGS', 
+                                trim: true
+                            ),
+                            string(
+                                defaultValue: 'http://opencart:8080', 
+                                name: 'BASE_URL', 
+                                trim: true
+                            ),
+                            choice (
+                                name: 'BROWSER',
+                                choices: 'chromium\nfirefox\nwebkit',
+                                defaultValue: 'chromium'
+                            ),
+                            booleanParam (
+                                name: 'HEADED',
+                                defaultValue: false,
+                                description: 'Run browser in headed mode'
+                            ),
+                            booleanParam (
+                                name: 'PW_DEBUG',
+                                defaultValue: false,
+                                description: 'Playwright DEBUG mode'
+                            ),
+                            // string(
+                            //     defaultValue: '', 
+                            //     name: 'BROWSER_VERSION', 
+                            //     trim: true
+                            // ),
+                            string(
+                                defaultValue: '1', 
+                                name: 'THREADS', 
+                                trim: true
+                            )
+                        ])
+                    ])
+                }
+            }
+        }
+        
+        stage('Checkout') {
+            steps {
+                git branch: 'main',url: 'https://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@github.com/Alive08/otus-qa-playwright.git'
+            }
+        }
+        
+        stage('Environment Setup') {
+            steps {
+                sh """#!/bin/bash
+                python3.9 -m venv .venv
+                    source .venv/bin/activate
+                    pip install pip -U
+                    pip install -r requirements.txt
+                pip install playwright
+                PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 python3 -m playwright install
+                rm -rf ./artifacts
+                mkdir -p ./artifacts
+                chmod 777 ./artifacts
+                pushd environment/opencart
+                ./up.sh
+                popd
+                """
+            }
+        }
+    
+        stage('Run Tests') {
+            steps {
+                 // wrap([$class: 'Xvfb', additionalOptions: '', assignedLabels: '', autoDisplayName: true, debug: true, displayNameOffset: 0, installationName: 'XVFB', parallelBuild: true, screen: '1024x1080x24', timeout: 25]) {
+                    wrap([$class: 'Xvfb', autoDisplayName: true, displayNameOffset: 0, screen: '1024x1080x24']) {
+                    sh """#!/bin/bash
+                    source .venv/bin/activate
+                    [ ${params.HEADED} == "true" ] && headed="--headed" || headed=""
+                    [ ${params.PW_DEBUG} == "true" ] && pw_debug="pw:api" || pw_debug=""
+                    DEBUG=\${pw_debug} \
+                    ./run_tests_local.sh \
+                    \${headed} \
+                    --browser=${params.BROWSER} \
+                    --base-url=${params.BASE_URL} \
+                    -n ${params.THREADS} \
+                    ${params.PYTEST_ARGS} \
+                    ${params.TESTS}
+                    """
+                }
+            }
+        }
+    
+        stage('Environment teardown') {
+            steps {
+                sh """#!/bin/bash
+                pushd environment/opencart
+                ./down.sh
+                popd
+                """
+            }
+
+            post {
+                always {
+                    allure includeProperties: false, jdk: '', report: 'artifacts/allure-report', results: [[path: 'artifacts/allure-results']]
+                    archiveArtifacts artifacts: 'artifacts/*.log', allowEmptyArchive: 'true'
+                    archiveArtifacts artifacts: 'artifacts/screenshots/**/*.png', allowEmptyArchive: 'true'
+                }
+            }
+        }
+    }
+}

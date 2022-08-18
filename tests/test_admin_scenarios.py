@@ -137,7 +137,6 @@ class TestAdminProductManagement:
 
         with allure.step("go to product list"):
             admin = Admin(page, url=login.url)
-            admin.on("dialog", lambda dialog: dialog.accept())
             admin.navigation.catalog.itself.click()
             admin.navigation.catalog.products.click()
 
@@ -153,6 +152,7 @@ class TestAdminProductManagement:
             if count:
                 for i in range(rows.count()):
                     product.select_product(rows.nth(i))
+                admin.on("dialog", lambda dialog: dialog.accept())
                 admin.delete_button.click()
                 expect(admin.alert_success_message).to_be_visible()
                 admin.close_alert_button.click()

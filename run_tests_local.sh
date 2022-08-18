@@ -15,6 +15,8 @@ fi
 
 ENV_DIR=environment/opencart
 
+export DEBUG=${DEBUG}
+
 pushd ${ENV_DIR}
 ./up.sh
 
