@@ -24,4 +24,3 @@ COPY . .
 ENV PYTHONPATH=.
 
 ENTRYPOINT [ "./entrypoint.sh" ]
-

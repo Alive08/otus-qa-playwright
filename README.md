@@ -36,3 +36,6 @@ Playwright UI tests for Opencart (proof of concept)
 
 В каждом случае можно задать переменную окружения DEBUG=pw:api, при этом производится расширенное логгирование
 вызовов API Playwright, что упрощает отладку тестов.
+
+Для установки зависимостей playwright, возможно, придется выполнить:
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EB3E94ADBE1229CF
