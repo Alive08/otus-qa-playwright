@@ -27,7 +27,10 @@ def browser_context_args(browser_context_args):
         "viewport": {
             "width": 1920,
             "height": 1080,
-        }
+        },
+        # "proxy": {
+        #     "server": "http://opencart:3128"
+        # }
     }
 
 

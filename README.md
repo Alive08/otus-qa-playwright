@@ -2,14 +2,37 @@
 
 Playwright UI tests for Opencart (proof of concept)
 
-Опции запуска (помимо стандартных рпций pytest'а):
-    --browser [chromium] - используемый браузер (chromium, firefox, webkit)
-    --headed [false] - запускать браузер в "headed" режиме (с отображением)
-    --base-usl - базовый URL тестируемого веб-приложения
-    --db-host [localhost] - адрес сервера MySQL
-    --test-log-level [INFO] - уровень логгирования ("DEBUG", "INFO", "WARNING", "ERROR")
-    --test-log-file [artifacts/testrun.log] - путь к лог-файлу
-    --screenshots-dir [artifacts/screenshots] - путь к каталогу скриншотов
+Опции запуска (помимо стандартных аргументов pytest'а):
+   - --browser [chromium] - используемый браузер (chromium, firefox, webkit)
+   - --headed [false] - запускать браузер в "headed" режиме (с отображением)
+   - --base-usl - базовый URL тестируемого веб-приложения
+   - --db-host [localhost] - адрес сервера MySQL
+   - --test-log-level [INFO] - уровень логгирования ("DEBUG", "INFO", "WARNING", "ERROR")
+   - --test-log-file [artifacts/testrun.log] - путь к лог-файлу
+   - --screenshots-dir [artifacts/screenshots] - путь к каталогу скриншотов
+
+ Подготовить рабочее окружение можно при помощи скрипта
+
+    ./setup-dev-env.sh
+
+если установка прошла успешно, в результате выполнения команды
+
+    playwright open http://otus.ru
+
+в браузере будет открыта главная страница сайта otus.ru
+
+если необходимо работать с движком webkit, нужно установить зависимости (требуется sudo):
+
+    playwright install-deps
+
+Для установки зависимостей playwright, возможно, придется выполнить команду:
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EB3E94ADBE1229CF
+
+Приведенные срипты содержат ссылки на доменное имя 'opencart', которое нужно внести в /etc/hosts
+для правильной работы скриптов:
+
+    <IP адрес вашего хоста> opencart, например
+    192.168.117.131 opencart
 
 Тесты можно запустить:
 
@@ -33,9 +56,8 @@ Playwright UI tests for Opencart (proof of concept)
 
 - в CI Jenkins - пайплайн opencart_tests_pipeline_playwright с передачей требуемых параметров.
     пайплайн запускается полностью в докере. Пайплайн описан в файле jenkins/pipeline-docker/Jenkinsfile
+    Также предусмотрен вариант запуска тестов непосредственно на хосте -
+    пайплайн jenkins/pipeline-local/Jenkinsfile
 
-В каждом случае можно задать переменную окружения DEBUG=pw:api, при этом производится расширенное логгирование
-вызовов API Playwright, что упрощает отладку тестов.
-
-Для установки зависимостей playwright, возможно, придется выполнить:
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EB3E94ADBE1229CF
+В каждом случае можно задать переменную окружения DEBUG=pw:api, при этом производится расширенное
+логгирование вызовов API Playwright, что упрощает отладку тестов.
