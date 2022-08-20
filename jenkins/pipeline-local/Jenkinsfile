@@ -65,7 +65,7 @@ pipeline {
         
         stage('Checkout') {
             steps {
-                git branch: 'main',url: 'https://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@github.com/Alive08/otus-qa-playwright.git'
+                git branch: 'main',url: 'https://github.com/Alive08/otus-qa-playwright.git'
             }
         }
         
